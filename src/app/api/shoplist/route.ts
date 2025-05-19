@@ -1,5 +1,5 @@
 import { prisma } from "@/app/components/prisma_client";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 // Retrieve all contents from the database
 export async function GET() {
@@ -9,7 +9,7 @@ export async function GET() {
 }
 
 // Add a new item to the database
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   const body = await request.json();
 
   const newItem = await prisma.shopping_list.create({
