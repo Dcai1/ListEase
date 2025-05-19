@@ -1,11 +1,12 @@
 import { prisma } from "@/app/components/prisma_client";
 import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: { params: { id: string } }
 ) {
-  const id = parseInt(params.id);
+  const id = parseInt(context.params.id);
 
   try {
     await prisma.shopping_list.delete({
@@ -21,10 +22,10 @@ export async function DELETE(
 }
 
 export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: { params: { id: string } }
 ) {
-  const id = parseInt(params.id);
+  const id = parseInt(context.params.id);
   const body = await request.json();
 
   try {
