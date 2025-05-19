@@ -1,3 +1,5 @@
+# About
+
 ListEase is a clean, responsive shopping list web app that helps you create, manage, and copy a perfectly formatted shopping list, ready to share via text or notes. Designed to be clean, fast, and mobile friendly.
 
 Created as a solo passion project, ListEase was made using Next.js, TypeScript, API calls, Prisma, and Tailwind.
