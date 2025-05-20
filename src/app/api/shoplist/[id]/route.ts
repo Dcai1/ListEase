@@ -2,15 +2,16 @@ import { prisma } from "@/app/components/prisma_client";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
-  const id = parseInt((await params).id);
+type Context = {
+  params: Promise<{ id: string }>;
+};
+
+export async function DELETE(request: NextRequest, context: Context) {
+  const { id } = await context.params;
 
   try {
     await prisma.shopping_list.delete({
-      where: { id },
+      where: { id: Number(id) },
     });
     return NextResponse.json({ message: "Item Deleted" });
   } catch (error) {
@@ -21,16 +22,13 @@ export async function DELETE(
   }
 }
 
-export async function PUT(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
-  const id = parseInt((await params).id);
+export async function PUT(request: NextRequest, context: Context) {
+  const { id } = await context.params;
   const body = await request.json();
 
   try {
     const updatedItem = await prisma.shopping_list.update({
-      where: { id },
+      where: { id: Number(id) },
       data: {
         item: body.item,
         priority: body.priority,
