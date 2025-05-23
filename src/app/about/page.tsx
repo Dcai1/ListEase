@@ -9,13 +9,13 @@ export default function About() {
         <div className="p-6 space-y-1 text-xl text-black border shadow-xl sm:text-2xl text-shadow-lg text-shadow-red-300 rounded-xl shadow-gray-300">
           <p>
             This is a website application that stores any shopping items you
-            create in a database. You can delete them, and copy a formatted
-            version of your shopping list to the clipboard, allowing you to send
-            the formatted version to anyone. (like your family members)
+            create in a database. You can delete, edit, create, and even copy a
+            formatted version of the list to your clipboard, so you can send it
+            to anyone. (Like your family members!)
           </p>
           <p className="p-6">
             <b>
-              I started it alone as a passion project, and also because I became
+              I started it alone as a passion project, and because I became
               tired of writing my shopping list on blank paper. Oh well!
             </b>
           </p>

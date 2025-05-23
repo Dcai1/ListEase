@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import PageButton from "./components/button";
 import InputBar from "./components/input";
+import { getAnonymousUserId } from "./util/session";
 
 type ShoppingListItem = {
   id: number;
@@ -10,6 +11,7 @@ type ShoppingListItem = {
   quantity: number;
   details: string | null;
   date: Date;
+  userId: string;
 };
 
 export default function Home() {
@@ -22,22 +24,24 @@ export default function Home() {
   const [item, setItem] = useState("");
   const [priority, setPriority] = useState(1);
   const [quantity, setQuantity] = useState(1);
-  const [details, setDetails] = useState("") || "No Description";
+  const [details, setDetails] = useState("No Description");
 
   const [isEditing, setIsEditing] = useState(false);
+
+  const userId = getAnonymousUserId();
 
   // Get shopping list items from the database
   useEffect(() => {
     setLoading(true);
     const fetchList = async () => {
-      const result = await fetch("api/shoplist");
+      const result = await fetch(`api/shoplist?userId=${userId}`);
       const data = await result.json();
       setShoppingList(data);
+      setLoading(false);
     };
 
     fetchList();
-    setLoading(false);
-  }, []);
+  }, [userId]);
 
   // Add an item
   const addItem = async () => {
@@ -46,7 +50,7 @@ export default function Home() {
       return;
     }
 
-    const res = await fetch("api/shoplist", {
+    const res = await fetch(`api/shoplist?userId=${userId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,6 +62,7 @@ export default function Home() {
         quantity,
         details,
         date: new Date().toISOString(),
+        userId,
       }),
     });
     // Error Handling
@@ -89,7 +94,7 @@ export default function Home() {
       return;
     }
 
-    const res = await fetch(`api/shoplist/${selection}`, {
+    const res = await fetch(`api/shoplist/${selection}?userId=${userId}`, {
       method: "DELETE",
     });
     if (!res.ok) {
@@ -98,6 +103,10 @@ export default function Home() {
       return;
     }
     setShoppingList((p) => p.filter((item) => item.id !== selection));
+    setItem("");
+    setPriority(1);
+    setQuantity(1);
+    setDetails("");
     setSelection(null);
   };
 
@@ -108,7 +117,7 @@ export default function Home() {
       return;
     }
 
-    const res = await fetch(`api/shoplist/${selection}`, {
+    const res = await fetch(`api/shoplist/${selection}?userId=${userId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -158,7 +167,7 @@ export default function Home() {
         return `${index + 1}. ${itemname} (${quantity}) ${
           description &&
           `- ${description} [${
-            (priority === 2 && `IMPORTANT`) || (priority === 3 && `URGENT`)
+            (priority === 2 && `IMPORTANT`) || (priority >= 3 && `URGENT`)
           }]`
         }`;
       })
@@ -186,7 +195,7 @@ export default function Home() {
       return;
     }
 
-    const res = await fetch("api/shoplist", {
+    const res = await fetch(`api/shoplist?userId=${userId}`, {
       method: "DELETE",
     });
 
@@ -214,8 +223,8 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-start min-h-[100vh] p-6 overflow-auto bg-gray-200 shadow-lg">
       <div className="w-full max-w-screen-xl p-3 m-4 text-black bg-white border-4 border-gray-200 shadow-lg shadow-gray-400 outline-4 outline-gray-500 rounded-xl">
-        <h1 className="p-3 mb-6 text-4xl text-center bg-gray-300 border-black border-3 sm:text-5xl">
-          Your Shopping List
+        <h1 className="p-3 mb-6 text-4xl text-center underline bg-gray-300 border-black bold italize underline-offset-8 border-3 sm:text-5xl">
+          ListEase
         </h1>
 
         <div className="p-3 m-3 text-lg sm:text-xl outline-4 outline-gray-500 rounded-xl">
@@ -232,8 +241,8 @@ export default function Home() {
               Click <b>Create</b> to add it to the list
             </li>
             <li>
-              Use the <b>Copy</b> button to export the list for texting or
-              saving
+              Use the <b>Copy to Clipboard</b> button to export the list for
+              texting or saving
             </li>
             <li>
               <b>Edit</b> or <b>delete</b> items on the fly!
@@ -241,8 +250,12 @@ export default function Home() {
           </ol>
         </div>
 
+        <h1 className="p-3 mx-auto mt-20 text-4xl text-center bg-gray-300 border-black shadow-xl rounded-2xl w-fit border-3 sm:text-5xl">
+          Your Shopping List
+        </h1>
+
         {/* Retrieve and display all items on the list */}
-        <div className="p-6 mt-20 mb-5 overflow-x-hidden bg-gray-100 border-4 border-gray-400 shadow-gray-100 rounded-3xl">
+        <div className="p-6 mt-6 mb-5 overflow-x-hidden bg-gray-100 border-4 border-gray-400 shadow-gray-100 rounded-3xl">
           {loading && (
             <div className="items-center mx-auto my-auto">
               <h1 className="text-3xl text-center text-black transition-all sm:text-4xl animate-bounce">
@@ -317,7 +330,7 @@ export default function Home() {
 
           {/* Priority */}
           <InputBar
-            label="Item Priority (Default 1)"
+            label="Item Priority (Default 1, Max 3)"
             type="number"
             placeholder="Item Priority (default: 1)"
             value={priority}
@@ -374,7 +387,12 @@ export default function Home() {
         </div>
 
         {/* Bottom Caption */}
-        <div className="p-3 m-3 text-lg text-center sm:text-xl outline-4 outline-gray-500 rounded-xl">
+        <div className="p-3 m-3 space-y-8 text-lg text-center sm:text-xl outline-4 outline-gray-500 rounded-xl">
+          <p>
+            Simply enter your items, click Create, and your shopping list is
+            ready to be copied to your clipboard and shared! <br />
+            Add, remove, and update entries as often as you need.
+          </p>
           <p>
             A digital shopping list is a convenient way to keep track of your
             grocery needs. You can add, remove, and update items as needed,
