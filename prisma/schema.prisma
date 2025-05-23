@@ -17,12 +17,12 @@ model shopping_list {
   id       Int      @id @default(autoincrement())
   userId   String
   priority Int      @default(1)
-  item     String   @unique @default("Empty") @db.VarChar(100)
+  item     String   @default("Empty") @db.VarChar(100)
   quantity Int      @default(1)
   details  String?  @default("No Description") @db.VarChar(300)
   date     DateTime @default(now())
 
   @@map("shopping_list")
   @@index([userId])
-  @@unique([id, userId])
+  @@unique([item, userId])
 }
