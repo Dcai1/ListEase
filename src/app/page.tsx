@@ -97,6 +97,7 @@ export default function Home() {
     const res = await fetch(`api/shoplist/${selection}?userId=${userId}`, {
       method: "DELETE",
     });
+    setIsEditing(false);
     if (!res.ok) {
       console.error(res.statusText);
       alert("Failed to delete item. Please try again.");
