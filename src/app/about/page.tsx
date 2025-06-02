@@ -1,7 +1,7 @@
 export default function About() {
   return (
-    <main className="flex flex-col min-h-screen p-10 mx-auto text-center bg-white">
-      <div className="p-6 mx-auto my-auto text-center transition-all duration-1000 bg-gray-200 border-4 border-gray-300 shadow-lg max-h-[100vh] hover:scale-103 rounded-3xl shadow-gray-800">
+    <main className="flex flex-col min-h-[100vh] p-10 mx-auto text-center overflow-auto bg-white">
+      <div className="p-6 overflow-auto mx-auto my-auto text-center transition-all duration-1000 bg-gray-200 border-4 border-gray-300 shadow-lg max-h-[100vh] hover:scale-103 rounded-3xl shadow-gray-800">
         <h1 className="p-10 mx-auto mb-6 text-2xl font-bold text-center transition-all bg-gray-400 rounded-full shadow-2xl sm:text-3xl lg:text-4xl hover:scale-120 w-fit shadow-gray-500">
           About This Website
         </h1>
@@ -11,7 +11,7 @@ export default function About() {
             This is a website application that stores any shopping items you
             create in a database. You can delete, edit, create, and even copy a
             formatted version of the list to your clipboard, so you can send it
-            to anyone. (Like your family members!)
+            to anyone (Like your family members!)
           </p>
           <p className="p-6">
             <b>

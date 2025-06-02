@@ -1,8 +1,8 @@
 # About
 
-ListEase is a clean, responsive shopping list web app that helps you create, manage, and copy a perfectly formatted shopping list, ready to share via text or notes. Designed to be clean, fast, and mobile friendly.
+SpeedList is a clean, responsive shopping list web app that helps you create, manage, and copy a perfectly formatted shopping list, ready to share via text or notes. Designed to be clean, fast, and mobile friendly.
 
-Created as a solo passion project, ListEase was made using Next.js, TypeScript, API calls, Prisma, and Tailwind.
+Created as a solo passion project, SpeedList was made using Next.js, TypeScript, API calls, Prisma, and Tailwind.
 
 ## Features
 
@@ -21,7 +21,7 @@ Created as a solo passion project, ListEase was made using Next.js, TypeScript, 
 Simply enter your items, click Create, and your shopping list is ready to be copied to your clipboard and shared.
 Add, remove, and update entries as often as you need.
 
-With ListEase, organizing your shopping trips is fast, simple, and stress-free.
+With SpeedList, organizing your shopping trips is _speedy_, simple, and **stress-free**.
 
 ## 📄 License
 

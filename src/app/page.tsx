@@ -225,14 +225,14 @@ export default function Home() {
     <main className="flex flex-col items-center justify-start min-h-[100vh] p-6 overflow-auto bg-gray-200 shadow-lg">
       <div className="w-full max-w-screen-xl p-3 m-4 text-black bg-white border-4 border-gray-200 shadow-lg shadow-gray-400 outline-4 outline-gray-500 rounded-xl">
         <h1 className="p-3 mb-6 text-4xl text-center underline bg-gray-300 border-black bold italize underline-offset-8 border-3 sm:text-5xl">
-          ListEase
+          SpeedList
         </h1>
 
-        <div className="p-3 m-3 text-lg sm:text-xl outline-4 outline-gray-500 rounded-xl">
+        <div className="p-3 m-3 overflow-auto text-lg sm:text-xl outline-4 outline-gray-500 rounded-xl">
           <p className="mb-6 text-center">
-            ListEase is a clean, responsive shopping list web app that helps you
-            create, manage, and copy a perfectly formatted shopping list, ready
-            to share via text or notes.
+            SpeedList is a clean, responsive shopping list web app that helps
+            you quickly create, manage, and copy a perfectly formatted shopping
+            list, ready to share via text or notes.
           </p>
           <ol className="p-6 m-6 mx-auto space-y-1 list-decimal list-inside transition-all duration-300 bg-gray-200 shadow-2xl hover:scale-120 sm:hover:scale-105 outline-gray-500 outline-3 rounded-xl w-fit shadow-gray-400">
             <li>
@@ -246,13 +246,13 @@ export default function Home() {
               texting or saving
             </li>
             <li>
-              <b>Edit</b> or <b>delete</b> items on the fly!
+              Quickly <b>edit</b> or <b>delete</b> items on the fly!
             </li>
           </ol>
         </div>
 
         <h1 className="p-3 mx-auto mt-20 text-4xl text-center bg-gray-300 border-black shadow-xl rounded-2xl w-fit border-3 sm:text-5xl">
-          Your Shopping List
+          Your SpeedList
         </h1>
 
         {/* Retrieve and display all items on the list */}
@@ -260,7 +260,7 @@ export default function Home() {
           {loading && (
             <div className="items-center mx-auto my-auto">
               <h1 className="text-3xl text-center text-black transition-all sm:text-4xl animate-bounce">
-                Loading Shopping List...
+                Loading Your Speed List...
               </h1>
             </div>
           )}
@@ -319,7 +319,7 @@ export default function Home() {
         </div>
 
         {/* Input Fields */}
-        <div className="grid items-center justify-center w-full max-w-screen-xl gap-6 p-6 m-3 mx-auto mb-10 xl:grid-cols-4 sm:grid-cols-4 md:grid-cols-2 rounded-xl outline-3 outline-gray-400">
+        <div className="grid items-center grid-cols-1 p-3 m-6 mx-auto mb-10 overflow-auto justify-items-center lg:grid-cols-4 md:grid-cols-2 rounded-xl outline-3 outline-gray-400">
           {/* Item Name */}
           <InputBar
             label="Item Name"
@@ -358,7 +358,7 @@ export default function Home() {
         </div>
 
         {/* Buttons */}
-        <div className="grid items-center w-full max-w-xl gap-1 m-3 mx-auto mb-5 justify- center md:grid-cols-3">
+        <div className="grid items-center w-full max-w-[100vh] gap-1 m-3 mx-auto mb-5 md:grid-cols-3">
           {/* Add or Update Item */}
           {isEditing ? (
             <PageButton
@@ -390,15 +390,16 @@ export default function Home() {
         {/* Bottom Caption */}
         <div className="p-3 m-3 space-y-8 text-lg text-center sm:text-xl outline-4 outline-gray-500 rounded-xl">
           <p>
-            Simply enter your items, click Create, and your shopping list is
-            ready to be copied to your clipboard and shared! <br />
-            Add, remove, and update entries as often as you need.
+            Simply enter your items, click <b>Create</b>, and your shopping list
+            is instantly ready to be copied to your clipboard and shared! <br />
+            <b>Add</b>, <b>remove</b>, and <b>update</b> entries as often as you
+            need.
           </p>
           <p>
             A digital shopping list is a convenient way to keep track of your
             grocery needs. You can add, remove, and update items as needed,
-            making it easier to plan your shopping trips and avoid forgetting
-            your most-essential items.
+            making it easier to plan and avoid forgetting your most-essential
+            items.
           </p>
         </div>
       </div>

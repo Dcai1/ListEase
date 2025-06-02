@@ -23,7 +23,7 @@ export default function InputBar({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className={`p-3 mb-5 focus:outline-green-500 text-xl font-bold text-black transition-all duration-300 shadow-xl min-w-fit rounded-xl outline-2 focus:scale-110 focus:shadow-green-300`}
+        className={`p-3 mb-5 focus:outline-green-500 text-lg sm:text-xl font-bold text-black transition-all duration-300 shadow-xl sm:min-w-[20vh] min-w-auto rounded-xl outline-2 focus:scale-110 focus:shadow-green-300`}
       />
     </div>
   );

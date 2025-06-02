@@ -25,7 +25,7 @@ export default function PageButton({
   return (
     <button
       onClick={onClick}
-      className={`p-3 m-3 text-xl font-bold text-center text-black transition-all bg-gray-300 outline-4 rounded-2xl sm:text-2xl ${
+      className={`p-3 m-3 text-lg font-bold text-center text-black transition-all bg-gray-300 outline-4 rounded-2xl sm:text-xl ${
         disabled
           ? "grayscale opacity-25 cursor-not-allowed"
           : `${hoverClass} hover:scale-120 active:scale-80`
